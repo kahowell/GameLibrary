@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:GameLibrary.UI.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GameLibrary.UI.Views.GameTableView"
+             x:DataType="viewModels:GameTableViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <viewModels:GameTableViewModel />
+  </Design.DataContext>
+  <Grid ColumnDefinitions="3*,Auto,2*" RowDefinitions="*">
+    <DockPanel>
+      <TextBox Text="{Binding GameListViewModel.SearchText}"
+               DockPanel.Dock="Top" Watermark="Search" UseFloatingWatermark="True"/>
+      <ProgressBar IsIndeterminate="True"
+                   DockPanel.Dock="Top"
+                   IsVisible="{Binding GameListViewModel.IsLoading}"/>
+      <TreeDataGrid Source="{Binding GameRowsSource}"
+                CanUserResizeColumns="True"/>
+    </DockPanel>
+    <GridSplitter Grid.Column="1" ResizeDirection="Columns" Background="Gray"/>
+    <ScrollViewer Grid.Column="2" DataContext="{Binding GameListViewModel.SelectedGame}">
+      <ScrollViewer.Background>
+        <ImageBrush Source="{Binding BackgroundImageAsync^}"
+                    Opacity="0.4"
+                    Stretch="UniformToFill"/>
+      </ScrollViewer.Background>
+      <StackPanel Margin="10">
+        <TextBlock
+          Text="{Binding Name, FallbackValue=Select a Game To View Details}"
+          FontWeight="Bold"
+          FontSize="32"
+          TextWrapping="WrapWithOverflow"/>
+        <TextBlock Text="{Binding ReleaseDate, Converter={StaticResource DateConverter}}"
+                   Margin="0 10 0 10"/>
+        <StackPanel Spacing="5" Margin="0 10 0 10">
+          <WrapPanel Orientation="Horizontal" IsVisible="{Binding Developers.Count, FallbackValue=False}">
+            <TextBlock Text="Developer: " FontWeight="Bold"/>
+            <TextBlock Text="{Binding Developers, Converter={StaticResource CompanyListConverter}}"
+                       TextWrapping="WrapWithOverflow"/>
+          </WrapPanel>
+          <WrapPanel Orientation="Horizontal" IsVisible="{Binding Publishers.Count, FallbackValue=False}">
+            <TextBlock Text="Publisher: " FontWeight="Bold"/>
+            <TextBlock Text="{Binding Publishers, Converter={StaticResource CompanyListConverter}}"
+                       TextWrapping="WrapWithOverflow"/>
+          </WrapPanel>
+        </StackPanel>
+        <TextBlock Text="{Binding Description}" TextWrapping="WrapWithOverflow"/>
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

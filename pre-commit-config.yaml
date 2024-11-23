@@ -1,0 +1,9 @@
+---
+repos:
+  - repo: local
+    hooks:
+      - id: resharper
+        name: resharper
+        language: system
+        entry: dotnet
+        args: [--exit-1-on-failure]

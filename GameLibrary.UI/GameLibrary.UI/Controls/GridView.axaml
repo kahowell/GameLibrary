@@ -1,0 +1,22 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:GameLibrary.UI.Controls">
+  <Design.PreviewWith>
+    <controls:GridView/>
+  </Design.PreviewWith>
+
+  <Style Selector="controls|GridView">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ItemsRepeater ItemsSource="{TemplateBinding ItemsSource}">
+          <ItemsRepeater.ItemTemplate>
+            <DataTemplate>
+              <controls:GridViewRow ItemsSource="{Binding .}" ItemTemplate="{Binding ItemTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:GridView}}"/>
+            </DataTemplate>
+          </ItemsRepeater.ItemTemplate>
+        </ItemsRepeater>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

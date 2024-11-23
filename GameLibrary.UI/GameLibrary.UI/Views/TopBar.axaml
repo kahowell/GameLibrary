@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:GameLibrary.UI.Controls"
+             xmlns:viewModels="clr-namespace:GameLibrary.UI.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="70"
+             x:Class="GameLibrary.UI.Views.TopBar"
+             x:DataType="viewModels:MainViewModel">
+  <StackPanel Orientation="Horizontal" Spacing="10" Margin="10">
+    <controls:ButtonWithIcon Icon="plus" Text="Add">
+      <controls:ButtonWithIcon.Flyout>
+        <MenuFlyout>
+          <MenuItem Header="Game">
+            <MenuItem.Icon>
+              <TextBlock FontFamily="{StaticResource FontAwesome}" Text="box"/>
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem Header="Library">
+            <MenuItem.Icon>
+              <TextBlock FontFamily="{StaticResource FontAwesome}" Text="boxes-stacked"/>
+            </MenuItem.Icon>
+          </MenuItem>
+        </MenuFlyout>
+      </controls:ButtonWithIcon.Flyout>
+    </controls:ButtonWithIcon>
+    <controls:ButtonWithIcon Icon="gear" Text="Settings"/>
+    <controls:ButtonWithIcon Icon="arrows-rotate" Text="Refresh"/>
+    <controls:ButtonWithIcon Icon="eye" Text="Views">
+      <controls:ButtonWithIcon.Flyout>
+        <MenuFlyout>
+          <MenuItem Command="{Binding ActivateListViewCommand}" Header="List View">
+            <MenuItem.Icon>
+              <TextBlock FontFamily="{StaticResource FontAwesome}" Text="table-list"/>
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem Command="{Binding ActivateGridViewCommand}" Header="Grid View">
+            <MenuItem.Icon>
+              <TextBlock FontFamily="{StaticResource FontAwesome}" Text="table-cells-large"/>
+            </MenuItem.Icon>
+          </MenuItem>
+        </MenuFlyout>
+      </controls:ButtonWithIcon.Flyout>
+    </controls:ButtonWithIcon>
+  </StackPanel>
+</UserControl>

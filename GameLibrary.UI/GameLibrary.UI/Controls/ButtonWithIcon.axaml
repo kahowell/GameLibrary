@@ -1,0 +1,27 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:GameLibrary.UI.Controls">
+  <Design.PreviewWith>
+    <controls:ButtonWithIcon Icon="plus" Text="Add">
+      <controls:ButtonWithIcon.Flyout>
+        <MenuFlyout>
+          <MenuItem Header="Test"/>
+        </MenuFlyout>
+      </controls:ButtonWithIcon.Flyout>
+    </controls:ButtonWithIcon>
+  </Design.PreviewWith>
+
+  <Style Selector="controls|ButtonWithIcon">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Button Height="32" Flyout="{TemplateBinding Flyout}">
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
+            <TextBlock FontSize="16" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center" Text="{TemplateBinding Icon}"/>
+            <TextBlock FontSize="14" VerticalAlignment="Center" Text="{TemplateBinding Text}"/>
+          </StackPanel>
+        </Button>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:GameLibrary.UI.ViewModels"
+             xmlns:controls="clr-namespace:GameLibrary.UI.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GameLibrary.UI.Views.GameGridView"
+             x:DataType="viewModels:GameGridViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <viewModels:GameGridViewModel />
+  </Design.DataContext>
+  <DockPanel>
+    <TextBox Text="{Binding GameListViewModel.SearchText}"
+             DockPanel.Dock="Top" Watermark="Search" UseFloatingWatermark="True"/>
+    <ProgressBar IsIndeterminate="True"
+                 DockPanel.Dock="Top"
+                 IsVisible="{Binding GameListViewModel.IsLoading}"/>
+    <ScrollViewer>
+      <!-- <controls:GridView ItemsSource="{Binding GameListViewModel.GameRows}" ColumnCount="5"> -->
+      <!--   <controls:GridView.ItemTemplate> -->
+      <!--     <DataTemplate> -->
+      <!--       <Image Source="{Binding CoverImageAsync^}" Width="150" Height="200"/> -->
+      <!--     </DataTemplate> -->
+      <!--   </controls:GridView.ItemTemplate> -->
+      <!-- </controls:GridView> -->
+      <Panel Margin="7">
+      <ItemsRepeater ItemsSource="{Binding GameListViewModel.GameRows}">
+        <ItemsRepeater.Layout>
+          <WrapLayout />
+        </ItemsRepeater.Layout>
+        <ItemsRepeater.ItemTemplate>
+          <DataTemplate>
+            <Button Padding="0" Margin="2" BorderThickness="5">
+              <!-- <Border BoxShadow="0 0 2 2 Black" Margin="7"> -->
+                <Image Source="{Binding CoverImageAsync^}" Height="400" Width="300"/>
+              <!-- </Border> -->
+            </Button>
+          </DataTemplate>
+        </ItemsRepeater.ItemTemplate>
+      </ItemsRepeater>
+      </Panel>
+    </ScrollViewer>
+  </DockPanel>
+</UserControl>

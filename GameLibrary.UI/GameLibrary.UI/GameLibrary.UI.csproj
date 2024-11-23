@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.2.0" />
+        <PackageReference Include="Avalonia.Controls.ItemsRepeater" Version="11.1.4" />
+        <PackageReference Include="Avalonia.Controls.TreeDataGrid" Version="11.0.10" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.0" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.0" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.0" />
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.0" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
+        <PackageReference Include="DynamicData" Version="9.0.4" />
+        <PackageReference Include="ReactiveUI" Version="20.1.63" />
+        <PackageReference Include="ReactiveUI.SourceGenerators" Version="2.0.17">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\GameLibrary.Core\GameLibrary.Core.csproj" />
+      <ProjectReference Include="..\..\GameLibrary.IGDB\GameLibrary.IGDB.csproj" />
+      <ProjectReference Include="..\..\GameLibrary.SQLite\GameLibrary.SQLite.csproj" />
+      <ProjectReference Include="..\..\GameLibrary.Steam\GameLibrary.Steam.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Controls\ButtonWithIcon.axaml.cs">
+        <DependentUpon>ButtonWithIcon.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\GameGridView.axaml.cs">
+        <DependentUpon>GameGridView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+</Project>

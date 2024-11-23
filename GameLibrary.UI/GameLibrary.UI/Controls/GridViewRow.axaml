@@ -1,0 +1,20 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:GameLibrary.UI.Controls">
+  <Design.PreviewWith>
+    <controls:GridViewRow />
+  </Design.PreviewWith>
+
+  <Style Selector="controls|GridViewRow">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ItemsRepeater ItemsSource="{TemplateBinding ItemsSource}" ItemTemplate="{TemplateBinding ItemTemplate}">
+          <ItemsRepeater.Layout>
+            <StackLayout Orientation="Horizontal"/>
+          </ItemsRepeater.Layout>
+        </ItemsRepeater>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>
