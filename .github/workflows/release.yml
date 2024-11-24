@@ -1,0 +1,38 @@
+---
+name: Publish release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0
+        cache: true
+    - run: dotnet restore --locked-mode
+    - run: mkdir -p AppDir/usr/bin
+    - run: dotnet publish --self-contained GameLibrary.UI/GameLibrary.UI.Desktop -o AppDir/usr/bin
+    - run: wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
+    - run: chmod a+x appimagetool-x86_64.AppImage
+    - run: ./appimagetool-x86_64.AppImage ./AppDir
+    - id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: preview-${{ github.run_number }}
+        prerelease: true
+    - uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: GameLibrary-x86_64.AppImage
+        asset_name: GameLibrary-x86_64.AppImage
+        asset_content_type: application/octet-stream

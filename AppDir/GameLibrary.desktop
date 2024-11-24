@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Game Library
+Comment=Game Library manager
+Icon=gamelibrary
+Exec=GameLibrary.UI.Desktop
+Path=~
+Terminal=false
+Categories=Game;
