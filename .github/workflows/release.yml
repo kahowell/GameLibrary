@@ -35,6 +35,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: GameLibrary-x86_64.AppImage
-          asset_name: GameLibrary-x86_64.AppImage
+          asset_path: Game_Library-x86_64.AppImage
+          asset_name: Game_Library-x86_64.AppImage
           asset_content_type: application/octet-stream
