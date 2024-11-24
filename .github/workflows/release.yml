@@ -15,6 +15,7 @@ jobs:
         with:
           dotnet-version: 8.0
           cache: true
+          cache-dependency-path: GameLibrary.UI/GameLibrary.UI.Desktop/packages.lock.json
       - run: dotnet restore --locked-mode GameLibrary.UI/GameLibrary.UI.Desktop
       - run: mkdir -p AppDir/usr/bin
       - run: dotnet publish --self-contained GameLibrary.UI/GameLibrary.UI.Desktop -o AppDir/usr/bin
