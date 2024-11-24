@@ -15,7 +15,7 @@ jobs:
         with:
           dotnet-version: 8.0
           cache: true
-      - run: dotnet restore --locked-mode
+      - run: dotnet restore --locked-mode GameLibrary.UI/GameLibrary.UI.Desktop
       - run: mkdir -p AppDir/usr/bin
       - run: dotnet publish --self-contained GameLibrary.UI/GameLibrary.UI.Desktop -o AppDir/usr/bin
       - run: wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
