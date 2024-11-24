@@ -21,7 +21,8 @@ jobs:
       - run: dotnet publish --self-contained GameLibrary.UI/GameLibrary.UI.Desktop -o AppDir/usr/bin
       - run: wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
       - run: chmod a+x appimagetool-x86_64.AppImage
-      - run: ./appimagetool-x86_64.AppImage ./AppDir
+      - run: ./appimagetool-x86_64.AppImage --appimage-extract
+      - run: squashfs-root/AppRun ./AppDir
       - id: create_release
         uses: actions/create-release@v1
         env:
