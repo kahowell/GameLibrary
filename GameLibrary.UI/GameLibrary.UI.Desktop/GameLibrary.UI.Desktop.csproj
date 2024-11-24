@@ -21,4 +21,8 @@
     <ItemGroup>
         <ProjectReference Include="..\GameLibrary.UI\GameLibrary.UI.csproj"/>
     </ItemGroup>
+
+    <PropertyGroup>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    </PropertyGroup>
 </Project>
