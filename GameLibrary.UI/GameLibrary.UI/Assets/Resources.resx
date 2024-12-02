@@ -51,4 +51,34 @@
     <data name="FirstRunTitle" xml:space="preserve">
         <value>Initial Setup</value>
     </data>
+    <data name="ButtonLabelAdd" xml:space="preserve">
+        <value>Add</value>
+    </data>
+    <data name="ButtonLabelSettings" xml:space="preserve">
+        <value>Settings</value>
+    </data>
+    <data name="ButtonLabelRefresh" xml:space="preserve">
+        <value>Refresh</value>
+    </data>
+    <data name="ButtonLabelHelp" xml:space="preserve">
+        <value>Help</value>
+    </data>
+    <data name="ButtonLabelViews" xml:space="preserve">
+        <value>Views</value>
+    </data>
+    <data name="ButtonLabelGridView" xml:space="preserve">
+        <value>Grid View</value>
+    </data>
+    <data name="ButtonLabelListView" xml:space="preserve">
+        <value>List View</value>
+    </data>
+    <data name="ButtonLabelAbout" xml:space="preserve">
+        <value>About</value>
+    </data>
+    <data name="ButtonLabelAddGame" xml:space="preserve">
+        <value>Add Game</value>
+    </data>
+    <data name="ButtonLabelAddLibrary" xml:space="preserve">
+        <value>Add Library</value>
+    </data>
 </root>

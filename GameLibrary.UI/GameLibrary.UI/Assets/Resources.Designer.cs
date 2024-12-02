@@ -110,5 +110,65 @@ namespace GameLibrary.UI.Assets {
                 return ResourceManager.GetString("FirstRunTitle", resourceCulture);
             }
         }
+
+        public static string ButtonLabelAdd {
+            get {
+                return ResourceManager.GetString("ButtonLabelAdd", resourceCulture);
+            }
+        }
+
+        public static string ButtonLabelSettings {
+            get {
+                return ResourceManager.GetString("ButtonLabelSettings", resourceCulture);
+            }
+        }
+
+        public static string ButtonLabelRefresh {
+            get {
+                return ResourceManager.GetString("ButtonLabelRefresh", resourceCulture);
+            }
+        }
+
+        public static string ButtonLabelHelp {
+            get {
+                return ResourceManager.GetString("ButtonLabelHelp", resourceCulture);
+            }
+        }
+
+        public static string ButtonLabelViews {
+            get {
+                return ResourceManager.GetString("ButtonLabelViews", resourceCulture);
+            }
+        }
+
+        public static string ButtonLabelGridView {
+            get {
+                return ResourceManager.GetString("ButtonLabelGridView", resourceCulture);
+            }
+        }
+
+        public static string ButtonLabelListView {
+            get {
+                return ResourceManager.GetString("ButtonLabelListView", resourceCulture);
+            }
+        }
+
+        public static string ButtonLabelAbout {
+            get {
+                return ResourceManager.GetString("ButtonLabelAbout", resourceCulture);
+            }
+        }
+
+        public static string ButtonLabelAddGame {
+            get {
+                return ResourceManager.GetString("ButtonLabelAddGame", resourceCulture);
+            }
+        }
+
+        public static string ButtonLabelAddLibrary {
+            get {
+                return ResourceManager.GetString("ButtonLabelAddLibrary", resourceCulture);
+            }
+        }
     }
 }

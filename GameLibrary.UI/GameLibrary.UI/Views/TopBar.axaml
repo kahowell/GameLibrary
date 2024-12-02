@@ -4,19 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:GameLibrary.UI.Controls"
              xmlns:viewModels="clr-namespace:GameLibrary.UI.ViewModels"
+             xmlns:assets="clr-namespace:GameLibrary.UI.Assets"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="70"
              x:Class="GameLibrary.UI.Views.TopBar"
              x:DataType="viewModels:MainViewModel">
   <StackPanel Orientation="Horizontal" Spacing="10" Margin="10">
-    <controls:ButtonWithIcon Icon="plus" Text="Add">
+    <controls:ButtonWithIcon Icon="plus" Text="{x:Static assets:Resources.ButtonLabelAdd}">
       <controls:ButtonWithIcon.Flyout>
         <MenuFlyout>
-          <MenuItem Header="Game">
+          <MenuItem Header="{x:Static assets:Resources.ButtonLabelAddGame}">
             <MenuItem.Icon>
               <TextBlock FontFamily="{StaticResource FontAwesome}" Text="box"/>
             </MenuItem.Icon>
           </MenuItem>
-          <MenuItem Header="Library">
+          <MenuItem Header="{x:Static assets:Resources.ButtonLabelAddLibrary}">
             <MenuItem.Icon>
               <TextBlock FontFamily="{StaticResource FontAwesome}" Text="boxes-stacked"/>
             </MenuItem.Icon>
@@ -24,17 +25,17 @@
         </MenuFlyout>
       </controls:ButtonWithIcon.Flyout>
     </controls:ButtonWithIcon>
-    <controls:ButtonWithIcon Icon="gear" Text="Settings"/>
-    <controls:ButtonWithIcon Icon="arrows-rotate" Text="Refresh"/>
-    <controls:ButtonWithIcon Icon="eye" Text="Views">
+    <controls:ButtonWithIcon Icon="gear" Text="{x:Static assets:Resources.ButtonLabelSettings}" />
+    <controls:ButtonWithIcon Icon="arrows-rotate" Text="{x:Static assets:Resources.ButtonLabelRefresh}"/>
+    <controls:ButtonWithIcon Icon="eye" Text="{x:Static assets:Resources.ButtonLabelViews}">
       <controls:ButtonWithIcon.Flyout>
         <MenuFlyout>
-          <MenuItem Command="{Binding ActivateListViewCommand}" Header="List View">
+          <MenuItem Command="{Binding ActivateListViewCommand}" Header="{x:Static assets:Resources.ButtonLabelListView}">
             <MenuItem.Icon>
               <TextBlock FontFamily="{StaticResource FontAwesome}" Text="table-list"/>
             </MenuItem.Icon>
           </MenuItem>
-          <MenuItem Command="{Binding ActivateGridViewCommand}" Header="Grid View">
+          <MenuItem Command="{Binding ActivateGridViewCommand}" Header="{x:Static assets:Resources.ButtonLabelGridView}">
             <MenuItem.Icon>
               <TextBlock FontFamily="{StaticResource FontAwesome}" Text="table-cells-large"/>
             </MenuItem.Icon>
@@ -42,10 +43,10 @@
         </MenuFlyout>
       </controls:ButtonWithIcon.Flyout>
     </controls:ButtonWithIcon>
-    <controls:ButtonWithIcon Icon="question" Text="Help">
+    <controls:ButtonWithIcon Icon="question" Text="{x:Static assets:Resources.ButtonLabelHelp}">
       <controls:ButtonWithIcon.Flyout>
         <MenuFlyout>
-          <MenuItem Command="{Binding ShowAboutCommand}" Header="About"/>
+          <MenuItem Command="{Binding ShowAboutCommand}" Header="{x:Static assets:Resources.ButtonLabelAbout}"/>
         </MenuFlyout>
       </controls:ButtonWithIcon.Flyout>
     </controls:ButtonWithIcon>
