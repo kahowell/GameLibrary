@@ -21,7 +21,7 @@ public class Configuration
         AllowTrailingCommas = true,
         CommentHandling = JsonCommentHandling.Skip
     };
-    private static readonly Dictionary<string, Type> _types = new();
+    private static readonly Dictionary<string, Type> Types = new();
 
     private readonly Dictionary<string, object?> _objects = new();
     private readonly string _path;
@@ -29,16 +29,18 @@ public class Configuration
     public Configuration(string path)
     {
         _path = path;
-        Read();
+        if (Exists()) Read();
     }
 
     public Configuration() : this(DefaultConfigurationPath)
     {
     }
 
+    public bool Exists() => File.Exists(_path);
+
     public static void Register<T>(string key) where T: class
     {
-        _types[key] = typeof(T);
+        Types[key] = typeof(T);
     }
 
     public static void Register<T>() where T : class
@@ -46,12 +48,14 @@ public class Configuration
         Register<T>(typeof(T).Name);
     }
 
-    public T Get<T>(string key) where T : class
+    public T? Get<T>(string key) where T : class
     {
-        return (T)_objects[key]!;
+        if (_objects.TryGetValue(key, out var result)) return (T?)result;
+        if (!Types.TryGetValue(key, out _)) throw new ArgumentOutOfRangeException($"Key {key} not found");
+        return (T?)result;
     }
 
-    public T Get<T>() where T : class
+    public T? Get<T>() where T : class
     {
         return Get<T>(typeof(T).Name);
     }
@@ -83,7 +87,7 @@ public class Configuration
             if (reader.TokenType == JsonTokenType.PropertyName)
             {
                 var key = reader.GetString()!;
-                if (_types.TryGetValue(key, out var type))
+                if (Types.TryGetValue(key, out var type))
                 {
                     var value = JsonSerializer.Deserialize(ref reader, type);
                     _objects[key] = value;

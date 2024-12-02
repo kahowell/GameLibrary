@@ -15,7 +15,7 @@
     <!-- Set Defaults -->
     <Setter Property="Template">
       <ControlTemplate>
-        <Button Height="32" Flyout="{TemplateBinding Flyout}">
+        <Button Height="32" Flyout="{TemplateBinding Flyout}" Command="{TemplateBinding Command}">
           <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
             <TextBlock FontSize="16" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center" Text="{TemplateBinding Icon}"/>
             <TextBlock FontSize="14" VerticalAlignment="Center" Text="{TemplateBinding Text}"/>

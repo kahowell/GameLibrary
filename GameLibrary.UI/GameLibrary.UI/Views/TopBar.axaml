@@ -42,5 +42,12 @@
         </MenuFlyout>
       </controls:ButtonWithIcon.Flyout>
     </controls:ButtonWithIcon>
+    <controls:ButtonWithIcon Icon="question" Text="Help">
+      <controls:ButtonWithIcon.Flyout>
+        <MenuFlyout>
+          <MenuItem Command="{Binding ShowAboutCommand}" Header="About"/>
+        </MenuFlyout>
+      </controls:ButtonWithIcon.Flyout>
+    </controls:ButtonWithIcon>
   </StackPanel>
 </UserControl>

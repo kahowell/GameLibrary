@@ -7,7 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <AvaloniaResource Include="Assets\**"/>
+        <AvaloniaResource Include="Assets\**" Exclude="Assets\Resources.resx;Assets/Resources.Designer.cs"/>
+        <AvaloniaResource Include="..\..\LICENSE.txt">
+            <Link>Assets/LICENSE.txt</Link>
+        </AvaloniaResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -45,5 +48,17 @@
         <DependentUpon>GameGridView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Assets\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Assets\Resources.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 </Project>
