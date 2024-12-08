@@ -39,6 +39,7 @@ public class MockGameLibrary: IGameLibrary
     ];
 
     public string LibraryId => "MockLibrary";
+    public string DisplayName => "Mock Library Display Name";
     public Task<IEnumerable<LibraryGame>> GetGamesAsync()
     {
         return Task.FromResult(_games.AsEnumerable());

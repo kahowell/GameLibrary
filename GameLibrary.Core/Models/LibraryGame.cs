@@ -12,6 +12,24 @@ public class LibraryGame
 
 public class LibraryGameSummary
 {
+    public LibraryGameSummary()
+    {
+        /* intentionally empty */
+    }
+
+    public LibraryGameSummary(LibraryGame libraryGame)
+    {
+        Id = libraryGame.Id;
+        LibraryService = libraryGame.LibraryService;
+        Name = libraryGame.Release?.Game?.Name ?? string.Empty;
+        SortingName = libraryGame.Release?.Game?.SortingName ?? Name;
+        CoverImage = libraryGame.Release?.Game?.CoverImage;
+        Region = libraryGame.Release?.Region ?? Region.Unknown;
+        ReleaseDate = libraryGame.Release?.ReleaseDate;
+        ReleaseDatePrecision = libraryGame.Release?.ReleaseDatePrecision;
+        LibraryGameStatus = libraryGame.LibraryGameStatus;
+    }
+
     public Guid Id { get; set; }
     public LibraryService? LibraryService { get; set; }
     public string Name { get; set; }

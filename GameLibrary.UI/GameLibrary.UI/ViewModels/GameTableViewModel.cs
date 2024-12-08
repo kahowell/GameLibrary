@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
@@ -14,6 +13,7 @@ using DynamicData;
 using GameLibrary.Core;
 using GameLibrary.Core.Mocks;
 using GameLibrary.Core.Models;
+using GameLibrary.UI.Assets;
 using GameLibrary.UI.Converters;
 using ReactiveUI.SourceGenerators;
 using Image = Avalonia.Controls.Image;
@@ -33,7 +33,7 @@ public partial class GameTableViewModel : ViewModelBase
         {
             Columns =
             {
-                new TemplateColumn<GameRowViewModel>("Cover", new FuncDataTemplate<GameRowViewModel>((_, _) =>
+                new TemplateColumn<GameRowViewModel>(Resources.LabelCover, new FuncDataTemplate<GameRowViewModel>((_, _) =>
                     new Image
                     {
                         [!Image.SourceProperty] = new Binding($"{nameof(GameRowViewModel.CoverImageAsync)}^"),
@@ -41,7 +41,7 @@ public partial class GameTableViewModel : ViewModelBase
                         Height = 200
                     }
                 )),
-                new TemplateColumn<GameRowViewModel>("Name", new FuncDataTemplate<GameRowViewModel>((_, _) =>
+                new TemplateColumn<GameRowViewModel>(Resources.LabelName, new FuncDataTemplate<GameRowViewModel>((_, _) =>
                         new TextBlock
                         {
                             [!TextBlock.TextProperty] = new Binding($"{nameof(GameRowViewModel.Name)}"),
@@ -59,7 +59,7 @@ public partial class GameTableViewModel : ViewModelBase
                         CanUserSortColumn = true
                     }
                 ),
-                new TemplateColumn<GameRowViewModel>("Release Date", new FuncDataTemplate<GameRowViewModel>((_, _) =>
+                new TemplateColumn<GameRowViewModel>(Resources.LabelReleaseDate, new FuncDataTemplate<GameRowViewModel>((_, _) =>
                     new TextBlock
                     {
                         [!TextBlock.TextProperty] = new Binding($"{nameof(GameRowViewModel.ReleaseDate)}")
@@ -75,7 +75,7 @@ public partial class GameTableViewModel : ViewModelBase
                     CompareDescending = (a, b) => Nullable.Compare(b?.ReleaseDate, a?.ReleaseDate),
                     CanUserSortColumn = true
                 }),
-                new TemplateColumn<GameRowViewModel>("Library", new FuncDataTemplate<GameRowViewModel>((_, _) =>
+                new TemplateColumn<GameRowViewModel>(Resources.LabelLibrary, new FuncDataTemplate<GameRowViewModel>((_, _) =>
                     new TextBlock
                     {
                         [!TextBlock.TextProperty] = new Binding($"{nameof(GameRowViewModel.Service)}"),
@@ -83,7 +83,7 @@ public partial class GameTableViewModel : ViewModelBase
                         VerticalAlignment = VerticalAlignment.Center,
                         Margin = Thickness.Parse("15")
                     }), width: GridLength.Parse("*")),
-                new TemplateColumn<GameRowViewModel>("Status", new FuncDataTemplate<GameRowViewModel>((_, _) =>
+                new TemplateColumn<GameRowViewModel>(Resources.LabelGameStatus, new FuncDataTemplate<GameRowViewModel>((_, _) =>
                     new TextBlock
                     {
                         [!TextBlock.TextProperty] = new Binding($"{nameof(GameRowViewModel.Status)}"),
@@ -105,10 +105,13 @@ public partial class GameTableViewModel : ViewModelBase
         }
         GameRowsSource.RowSelection!.SelectionChanged += async (_, args) =>
         {
-            gameListViewModel.SelectedGame = new GameDetailsViewModel((await args.SelectedItems
-                .OfType<GameRowViewModel>()
-                .Select(async s => await libraryGameRepository.GetLibraryGameByIdAsync(s.Id))
-                .FirstOrDefault()!)!, imageRepository);
+            if (args.SelectedItems.Count > 0)
+            {
+                gameListViewModel.SelectedGame = new GameDetailsViewModel((await args.SelectedItems
+                    .OfType<GameRowViewModel>()
+                    .Select(async s => await libraryGameRepository.GetLibraryGameByIdAsync(s.Id))
+                    .FirstOrDefault()!)!, imageRepository);
+            }
         };
     }
 
@@ -119,9 +122,8 @@ public partial class GameTableViewModel : ViewModelBase
     }
 }
 
-public class GameRowViewModel(int index, LibraryGameSummary libraryGame, IImageRepository imageRepository) : ViewModelBase
+public class GameRowViewModel(LibraryGameSummary libraryGame, IImageRepository imageRepository) : ViewModelBase
 {
-    public int Index { get; } = index;
     public Guid Id => libraryGame.Id;
     public LibraryService? Service => libraryGame.LibraryService;
     public LibraryGameStatus Status => libraryGame.LibraryGameStatus;

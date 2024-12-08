@@ -17,9 +17,9 @@ public partial class AboutViewModel : ViewModelBase, IRoutableViewModel
     [Reactive] private string _creditsText = LoadTextFile("CREDITS.txt");
     [Reactive] private string _licenseText = LoadTextFile("LICENSE.txt");
     [Reactive] private string _fontAwesomeLicenseText = LoadTextFile(@"Fonts\FontAwesome-LICENSE.txt");
-    private readonly IScreen _hostScreen;
+    private readonly Lazy<IScreen> _hostScreen;
 
-    public AboutViewModel(IScreen hostScreen)
+    public AboutViewModel(Lazy<IScreen> hostScreen)
     {
         _hostScreen = hostScreen;
         BackCommand = ReactiveCommand.Create(() =>
@@ -41,6 +41,6 @@ public partial class AboutViewModel : ViewModelBase, IRoutableViewModel
     }
 
     public string? UrlPathSegment => "about";
-    public IScreen HostScreen => _hostScreen;
+    public IScreen HostScreen => _hostScreen.Value;
     public ReactiveCommand<Unit, Unit> BackCommand { get; }
 }

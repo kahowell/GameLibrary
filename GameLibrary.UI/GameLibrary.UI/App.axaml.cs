@@ -11,6 +11,7 @@ using GameLibrary.SQLite;
 using GameLibrary.Steam;
 using GameLibrary.UI.ViewModels;
 using GameLibrary.UI.Views;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 
@@ -18,6 +19,7 @@ namespace GameLibrary.UI;
 
 public partial class App : Application
 {
+    public static IServiceProvider? ServiceProvider { get; set; }
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -34,11 +36,18 @@ public partial class App : Application
         collection.AddSingleton<IScreen, AppViewModel>();
         collection.AddSingleton<Lazy<IScreen>>(s => new Lazy<IScreen>(s.GetRequiredService<IScreen>));
         collection.AddSingleton<AppViewModel>();
-        collection.AddSingleton<SettingsViewModel>();
+        collection.AddSingleton<AboutViewModel>();
+        collection.AddTransient<AddLibraryViewModel>();
+        collection.AddTransient<SettingsViewModel>();
         collection.AddSingleton<GameListViewModel>();
+        collection.AddSingleton<GameTableViewModel>();
+        collection.AddSingleton<GameGridViewModel>();
         collection.AddSingleton<FirstRunViewModel>();
         collection.AddSingleton<MainViewModel>();
         var services = collection.BuildServiceProvider();
+        ServiceProvider = services;
+        var dbContext = services.GetRequiredService<LibraryContext>();
+        dbContext.Database.Migrate();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             // Line below is needed to remove Avalonia data validation.

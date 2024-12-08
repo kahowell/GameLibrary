@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using GameFinder.RegistryUtils;
 using GameFinder.StoreHandlers.Steam;
@@ -7,6 +8,7 @@ using GameFinder.StoreHandlers.Steam.Services;
 using GameLibrary.Core;
 using GameLibrary.Core.Models;
 using NexusMods.Paths;
+using ValveKeyValue;
 
 namespace GameLibrary.Steam;
 
@@ -21,15 +23,25 @@ public class SteamSourceProvider(HttpClient client, Configuration configuration)
             .Combine(SteamLocationFinder.UserDataDirectoryName).EnumerateDirectories(recursive: false);
         return Task.FromResult<IEnumerable<IGameLibrary>>(profiles.Select(directory =>
         {
+            var localConfig = directory.Combine(new RelativePath("config/localconfig.vdf"));
             var steamId = SteamId.FromAccountId(UInt32.Parse(directory.Name));
+            var stream = localConfig.Read();
+            var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
+            var localConfigStore = kv.Deserialize(stream, KVSerializerOptions.DefaultOptions);
+            var displayName = localConfigStore["friends"]["PersonaName"].ToString(CultureInfo.InvariantCulture);
             // NOTE: above factory method doesn't set account instance to 1. See https://steamcommunity.com/profiles/
             steamId = SteamId.From(steamId.RawId | 0x100000000);
-            return new SteamLibrary(client, configuration, steamId.RawId.ToString());
+            return new SteamLibrary(client, configuration, steamId.RawId.ToString(), displayName);
         }));
+    }
+
+    public SteamLibrary GetLibrary(string steamId, string displayName)
+    {
+        return new SteamLibrary(client, configuration, steamId, displayName);
     }
 }
 
-public partial class SteamLibrary(HttpClient client, Configuration configuration, string steamId) : IGameLibrary
+public partial class SteamLibrary(HttpClient client, Configuration configuration, string steamId, string displayName) : IGameLibrary
 {
     [GeneratedRegex("^Steam Linux Runtime")]
     private static partial Regex SteamLinuxRuntimeRegex();
@@ -43,8 +55,8 @@ public partial class SteamLibrary(HttpClient client, Configuration configuration
         ProtonRegex()
     ];
     private readonly SteamHandler _handler = new(FileSystem.Shared, OperatingSystem.IsWindows() ? WindowsRegistry.Shared : null);
-    private readonly string _apiKey = configuration.Get<SteamOptions>().ApiKey;
-    private readonly bool _useCache = configuration.Get<SteamOptions>().UseCache;
+    private readonly string? _apiKey = configuration.Get<SteamOptions>()?.GetApiKey(steamId);
+    private readonly bool _useCache = configuration.Get<SteamOptions>()?.UseCache ?? false;
     private readonly string _cacheDir = Configuration.EnsureCacheDirectory("GameLibrary.Steam");
 
     private async Task<SteamUserGameReport> GetSteamUserGameReportAsync()
@@ -82,6 +94,7 @@ public partial class SteamLibrary(HttpClient client, Configuration configuration
     }
 
     public string LibraryId => steamId;
+    public string DisplayName => displayName;
 
     public async Task<IEnumerable<LibraryGame>> GetGamesAsync()
     {

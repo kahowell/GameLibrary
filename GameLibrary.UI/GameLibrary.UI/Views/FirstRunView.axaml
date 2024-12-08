@@ -19,10 +19,10 @@
         TextWrapping="WrapWithOverflow" />
       <HyperlinkButton NavigateUri="https://api-docs.igdb.com/">https://api-docs.igdb.com/</HyperlinkButton>
       <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,Auto">
-        <TextBlock VerticalAlignment="Center" Text="{x:Static assets:Resources.SettingsIgdbClientIdLabel}" />
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Settings.IgdbClientId}" Width="250" />
-        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="{x:Static assets:Resources.SettingsIgdbClientSecretLabel}" />
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Settings.IgdbClientSecret}" Width="250" />
+        <TextBlock VerticalAlignment="Center" Text="{x:Static assets:Resources.SettingsIgdbClientIdLabel}" Margin="0 0 8 0"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Settings.IgdbClientId}" Width="250" Margin="0 4"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="{x:Static assets:Resources.SettingsIgdbClientSecretLabel}" Margin="0 0 8 0"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Settings.IgdbClientSecret}" Width="250" Margin="0 4"/>
       </Grid>
       <controls:ButtonWithIcon Icon="check"
                                Text="{x:Static assets:Resources.ButtonLabelSave}"

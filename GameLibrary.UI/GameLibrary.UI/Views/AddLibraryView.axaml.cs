@@ -1,13 +1,17 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using GameLibrary.UI.ViewModels;
+using ReactiveUI;
 
 namespace GameLibrary.UI.Views;
 
-public partial class AddLibraryView : UserControl
+public partial class AddLibraryView : ReactiveUserControl<AddLibraryViewModel>
 {
     public AddLibraryView()
     {
-        InitializeComponent();
+        this.WhenActivated(disposables => { });
+        AvaloniaXamlLoader.Load(this);
     }
 }

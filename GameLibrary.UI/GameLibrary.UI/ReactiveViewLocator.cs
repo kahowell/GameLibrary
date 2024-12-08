@@ -12,6 +12,7 @@ public class ReactiveViewLocator : IViewLocator
         FirstRunViewModel => new FirstRunView(),
         MainViewModel => new MainView(),
         AboutViewModel => new AboutView(),
+        AddLibraryViewModel => new AddLibraryView(),
         _ => throw new ArgumentOutOfRangeException(nameof(viewModel), viewModel, null)
     };
 }

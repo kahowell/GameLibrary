@@ -1,6 +1,6 @@
 namespace GameLibrary.Core.Services;
 
-public abstract class ObservableTask<TStatus>
+public abstract class ObservableTask<TStatus>: IObservable<TStatus>
 {
     protected abstract TStatus Status { get; }
     public abstract Task Run();

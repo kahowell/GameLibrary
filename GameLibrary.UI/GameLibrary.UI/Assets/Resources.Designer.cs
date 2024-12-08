@@ -117,12 +117,6 @@ namespace GameLibrary.UI.Assets {
             }
         }
 
-        public static string ButtonLabelSettings {
-            get {
-                return ResourceManager.GetString("ButtonLabelSettings", resourceCulture);
-            }
-        }
-
         public static string ButtonLabelRefresh {
             get {
                 return ResourceManager.GetString("ButtonLabelRefresh", resourceCulture);
@@ -159,15 +153,81 @@ namespace GameLibrary.UI.Assets {
             }
         }
 
-        public static string ButtonLabelAddGame {
-            get {
-                return ResourceManager.GetString("ButtonLabelAddGame", resourceCulture);
-            }
-        }
-
         public static string ButtonLabelAddLibrary {
             get {
                 return ResourceManager.GetString("ButtonLabelAddLibrary", resourceCulture);
+            }
+        }
+
+        public static string AddLibraryTitle {
+            get {
+                return ResourceManager.GetString("AddLibraryTitle", resourceCulture);
+            }
+        }
+
+        public static string LabelSteamUser {
+            get {
+                return ResourceManager.GetString("LabelSteamUser", resourceCulture);
+            }
+        }
+
+        public static string LabelApiKey {
+            get {
+                return ResourceManager.GetString("LabelApiKey", resourceCulture);
+            }
+        }
+
+        public static string ButtonLabelRemoveSteamLibrary {
+            get {
+                return ResourceManager.GetString("ButtonLabelRemoveSteamLibrary", resourceCulture);
+            }
+        }
+
+        public static string ButtonLabelAddSteamLibrary {
+            get {
+                return ResourceManager.GetString("ButtonLabelAddSteamLibrary", resourceCulture);
+            }
+        }
+
+        public static string LabelCover {
+            get {
+                return ResourceManager.GetString("LabelCover", resourceCulture);
+            }
+        }
+
+        public static string LabelName {
+            get {
+                return ResourceManager.GetString("LabelName", resourceCulture);
+            }
+        }
+
+        public static string LabelReleaseDate {
+            get {
+                return ResourceManager.GetString("LabelReleaseDate", resourceCulture);
+            }
+        }
+
+        public static string LabelGameStatus {
+            get {
+                return ResourceManager.GetString("LabelGameStatus", resourceCulture);
+            }
+        }
+
+        public static string LabelLibrary {
+            get {
+                return ResourceManager.GetString("LabelLibrary", resourceCulture);
+            }
+        }
+
+        public static string AddLibraryLabelDiscoveredSteamLibraries {
+            get {
+                return ResourceManager.GetString("AddLibraryLabelDiscoveredSteamLibraries", resourceCulture);
+            }
+        }
+
+        public static string AddLibrarySteamInstructions {
+            get {
+                return ResourceManager.GetString("AddLibrarySteamInstructions", resourceCulture);
             }
         }
     }

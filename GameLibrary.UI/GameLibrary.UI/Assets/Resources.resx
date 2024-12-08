@@ -37,10 +37,10 @@
         <value>Follow the instructions at the below link and provide client secret and client ID values in the text field below.</value>
     </data>
     <data name="SettingsIgdbClientIdLabel" xml:space="preserve">
-        <value>IGDB Client ID: </value>
+        <value>IGDB Client ID</value>
     </data>
     <data name="SettingsIgdbClientSecretLabel" xml:space="preserve">
-        <value>IGDB Client Secret: </value>
+        <value>IGDB Client Secret</value>
     </data>
     <data name="ButtonLabelSave" xml:space="preserve">
         <value>Save</value>
@@ -53,9 +53,6 @@
     </data>
     <data name="ButtonLabelAdd" xml:space="preserve">
         <value>Add</value>
-    </data>
-    <data name="ButtonLabelSettings" xml:space="preserve">
-        <value>Settings</value>
     </data>
     <data name="ButtonLabelRefresh" xml:space="preserve">
         <value>Refresh</value>
@@ -75,10 +72,43 @@
     <data name="ButtonLabelAbout" xml:space="preserve">
         <value>About</value>
     </data>
-    <data name="ButtonLabelAddGame" xml:space="preserve">
-        <value>Add Game</value>
-    </data>
     <data name="ButtonLabelAddLibrary" xml:space="preserve">
         <value>Add Library</value>
+    </data>
+    <data name="AddLibraryTitle" xml:space="preserve">
+        <value>Add Library</value>
+    </data>
+    <data name="LabelSteamUser" xml:space="preserve">
+        <value>Steam User</value>
+    </data>
+    <data name="LabelApiKey" xml:space="preserve">
+        <value>API Key</value>
+    </data>
+    <data name="ButtonLabelRemoveSteamLibrary" xml:space="preserve">
+        <value>Remove Steam Library</value>
+    </data>
+    <data name="ButtonLabelAddSteamLibrary" xml:space="preserve">
+        <value>Add Steam Library</value>
+    </data>
+    <data name="LabelCover" xml:space="preserve">
+        <value>Cover Image</value>
+    </data>
+    <data name="LabelName" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="LabelReleaseDate" xml:space="preserve">
+        <value>Release Date</value>
+    </data>
+    <data name="LabelGameStatus" xml:space="preserve">
+        <value>Status</value>
+    </data>
+    <data name="LabelLibrary" xml:space="preserve">
+        <value>Library</value>
+    </data>
+    <data name="AddLibraryLabelDiscoveredSteamLibraries" xml:space="preserve">
+        <value>Steam Libraries on this System</value>
+    </data>
+    <data name="AddLibrarySteamInstructions" xml:space="preserve">
+        <value>Steam library integration requires an API key to sync steam library contents. Use the following link to create a Steam API Key.</value>
     </data>
 </root>

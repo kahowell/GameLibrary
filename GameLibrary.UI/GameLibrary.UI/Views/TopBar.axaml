@@ -12,12 +12,7 @@
     <controls:ButtonWithIcon Icon="plus" Text="{x:Static assets:Resources.ButtonLabelAdd}">
       <controls:ButtonWithIcon.Flyout>
         <MenuFlyout>
-          <MenuItem Header="{x:Static assets:Resources.ButtonLabelAddGame}">
-            <MenuItem.Icon>
-              <TextBlock FontFamily="{StaticResource FontAwesome}" Text="box"/>
-            </MenuItem.Icon>
-          </MenuItem>
-          <MenuItem Header="{x:Static assets:Resources.ButtonLabelAddLibrary}">
+          <MenuItem Header="{x:Static assets:Resources.ButtonLabelAddLibrary}" Command="{Binding ShowAddLibraryCommand}">
             <MenuItem.Icon>
               <TextBlock FontFamily="{StaticResource FontAwesome}" Text="boxes-stacked"/>
             </MenuItem.Icon>
@@ -25,8 +20,7 @@
         </MenuFlyout>
       </controls:ButtonWithIcon.Flyout>
     </controls:ButtonWithIcon>
-    <controls:ButtonWithIcon Icon="gear" Text="{x:Static assets:Resources.ButtonLabelSettings}" />
-    <controls:ButtonWithIcon Icon="arrows-rotate" Text="{x:Static assets:Resources.ButtonLabelRefresh}"/>
+    <controls:ButtonWithIcon Classes="busy-spin" Icon="arrows-rotate" Text="{x:Static assets:Resources.ButtonLabelRefresh}" Command="{Binding SyncLibrariesCommand}"/>
     <controls:ButtonWithIcon Icon="eye" Text="{x:Static assets:Resources.ButtonLabelViews}">
       <controls:ButtonWithIcon.Flyout>
         <MenuFlyout>

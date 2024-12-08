@@ -39,7 +39,8 @@ public class LibrarySyncTask : ObservableTask<LibrarySyncStatus>
         NotifyStatus();
         foreach (var game in await Library.GetGamesAsync())
         {
-            await SyncLibraryGameAsync(game);
+            var addedGame = await SyncLibraryGameAsync(game);
+            Status.AddedGame = addedGame;
             Status.ImportedGameCount++;
             NotifyStatus();
         }
@@ -49,7 +50,7 @@ public class LibrarySyncTask : ObservableTask<LibrarySyncStatus>
     private async Task<LibraryGame?> SyncLibraryGameAsync(LibraryGame libraryGame)
     {
         var existing = await LibraryGameRepository.FindExistingAsync(libraryGame);
-        if (existing != null) return existing;
+        if (existing != null) return null;
         var game = await DataSource.FindGameAsync(libraryGame);
         if (game != null) game = await SyncGameAsync(game);
         if (game != null) libraryGame.Release = ChooseRelease(libraryGame, game);
@@ -167,4 +168,5 @@ public class LibrarySyncStatus
 {
     public int? GameCount { get; set; }
     public int ImportedGameCount { get; set; }
+    public LibraryGame? AddedGame { get; set; }
 }

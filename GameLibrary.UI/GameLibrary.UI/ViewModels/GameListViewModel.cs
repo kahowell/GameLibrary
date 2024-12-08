@@ -43,17 +43,20 @@ public partial class GameListViewModel: ViewModelBase
             .Subscribe();
     }
 
+    public void AddGame(GameRowViewModel game)
+    {
+        _sourceCache.AddOrUpdate(game);
+    }
+
     public async Task LoadGames(IImageRepository imageRepository, CancellationToken token = default)
     {
         await Dispatcher.UIThread.InvokeAsync(() => IsLoading = true);
         _sourceCache.Edit(change => change.Clear());
         try
         {
-            var i = 0;
             foreach (var game in await _libraryGameRepository.GetAllAsync(token))
             {
-                _sourceCache.Edit(change => change.AddOrUpdate(new GameRowViewModel(i, game, imageRepository)));
-                i++;
+                _sourceCache.Edit(change => change.AddOrUpdate(new GameRowViewModel(game, imageRepository)));
             }
         }
         finally

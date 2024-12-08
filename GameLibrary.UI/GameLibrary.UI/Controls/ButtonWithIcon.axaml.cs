@@ -1,7 +1,9 @@
 using System.Reactive;
+using System.Reactive.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Media;
 using ReactiveUI;
 
 namespace GameLibrary.UI.Controls;
@@ -19,6 +21,11 @@ public class ButtonWithIcon : TemplatedControl
 
     public static readonly StyledProperty<FlyoutBase?> FlyoutProperty =
         AvaloniaProperty.Register<ButtonWithIcon, FlyoutBase?>(nameof(Flyout));
+
+    public static readonly StyledProperty<RotateTransform?> IconRotateTransformProperty =
+        AvaloniaProperty.Register<ButtonWithIcon, RotateTransform?>(nameof(IconRotateTransform));
+
+    public static ReactiveCommand<Unit, Unit> TestCommand { get; } = ReactiveCommand.Create(() => { }, Observable.FromAsync(async() => false));
 
     public string Icon
     {
@@ -42,5 +49,11 @@ public class ButtonWithIcon : TemplatedControl
     {
         get => GetValue(FlyoutProperty);
         set => SetValue(FlyoutProperty, value);
+    }
+
+    public RotateTransform? IconRotateTransform
+    {
+        get => GetValue(IconRotateTransformProperty);
+        set => SetValue(IconRotateTransformProperty, value);
     }
 }

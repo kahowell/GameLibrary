@@ -2,11 +2,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:assets="clr-namespace:GameLibrary.UI.Assets"
+             xmlns:controls="clr-namespace:GameLibrary.UI.Controls"
+             xmlns:viewModels="clr-namespace:GameLibrary.UI.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="GameLibrary.UI.Views.AddLibraryView">
-  <StackPanel>
-    <ComboBox>
-      <ComboBoxItem>Steam</ComboBoxItem>
-    </ComboBox>
-  </StackPanel>
+             x:Class="GameLibrary.UI.Views.AddLibraryView"
+             x:DataType="viewModels:AddLibraryViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <viewModels:AddLibraryViewModel />
+  </Design.DataContext>
+  <DockPanel>
+    <StackPanel DockPanel.Dock="Top" Margin="16" Spacing="16" Orientation="Horizontal">
+      <controls:ButtonWithIcon Icon="arrow-left" Text="{x:Static assets:Resources.ButtonLabelBack}" Command="{Binding BackCommand}" />
+      <TextBlock FontSize="32" Text="{x:Static assets:Resources.AddLibraryTitle}" />
+    </StackPanel>
+    <ScrollViewer>
+      <StackPanel Margin="16 0" Spacing="8">
+        <TextBlock FontSize="20" Text="{x:Static assets:Resources.AddLibraryLabelDiscoveredSteamLibraries}"/>
+        <TextBlock TextWrapping="Wrap" Text="{x:Static assets:Resources.AddLibrarySteamInstructions}"/>
+        <HyperlinkButton NavigateUri="https://steamcommunity.com/dev/apikey" Content="https://steamcommunity.com/dev/apikey"/>
+        <TreeDataGrid Source="{Binding DiscoveredSteamLibrarySource}" CanUserResizeColumns="True"/>
+      </StackPanel>
+    </ScrollViewer>
+  </DockPanel>
 </UserControl>

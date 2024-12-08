@@ -27,7 +27,6 @@ public partial class FirstRunViewModel : ViewModelBase, IRoutableViewModel
 
     private void SaveSettings()
     {
-        Console.WriteLine("Saving settings");
         Settings.Save();
         if (NextViewModel != null) HostScreen.Router.Navigate.Execute(NextViewModel);
     }

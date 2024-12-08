@@ -17,11 +17,24 @@
       <ControlTemplate>
         <Button Height="32" Flyout="{TemplateBinding Flyout}" Command="{TemplateBinding Command}">
           <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="5">
-            <TextBlock FontSize="16" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center" Text="{TemplateBinding Icon}"/>
+            <TextBlock Name="icon" FontSize="16" FontFamily="{StaticResource FontAwesome}" VerticalAlignment="Center" Text="{TemplateBinding Icon}" RenderTransform="{TemplateBinding IconRotateTransform}"/>
             <TextBlock FontSize="14" VerticalAlignment="Center" Text="{TemplateBinding Text}"/>
           </StackPanel>
         </Button>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="controls|ButtonWithIcon.busy-spin /template/ TextBlock#icon[IsEffectivelyEnabled=False]">
+    <Setter Property="RotateTransform.Angle" Value="0.0"/>
+    <Style.Animations>
+      <Animation Duration="0:0:1" IterationCount="INFINITE">
+        <KeyFrame Cue="0%">
+          <Setter Property="RotateTransform.Angle" Value="0.0"/>
+        </KeyFrame>
+        <KeyFrame Cue="100%">
+          <Setter Property="RotateTransform.Angle" Value="360.0"/>
+        </KeyFrame>
+      </Animation>
+    </Style.Animations>
   </Style>
 </Styles>
