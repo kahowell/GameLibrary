@@ -20,6 +20,7 @@ jobs:
       - run: dotnet restore --locked-mode GameLibrary.UI/GameLibrary.UI.Desktop
       - run: mkdir -p AppDir/usr/bin
       - run: dotnet publish --self-contained GameLibrary.UI/GameLibrary.UI.Desktop -o AppDir/usr/bin
+      - run: dotnet publish -r win-x64 -p:IncludeNativeLibrariesForSelfExtract=true -p:PublishSingleFile=true -p:DebugType=embedded --self-contained -o . GameLibrary.UI/GameLibrary.UI.Desktop
       - run: wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
       - run: chmod a+x appimagetool-x86_64.AppImage
       - run: ./appimagetool-x86_64.AppImage --appimage-extract
@@ -39,3 +40,11 @@ jobs:
           asset_path: Game_Library-x86_64.AppImage
           asset_name: Game_Library-x86_64.AppImage
           asset_content_type: application/octet-stream
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: GameLibrary.UI.Desktop.exe
+          asset_name: GameLibrary.UI.Desktop.exe
+          asset_content_type: application/vnd.microsoft.portable-executable
